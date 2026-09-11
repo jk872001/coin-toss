@@ -4,8 +4,8 @@ const SIZE = 1024
 const STEEL = '#c8ccd2'
 const STEEL_DARK = '#7a8088'
 const STEEL_LIGHT = '#e8eaee'
-const INK = '#2a2e34'
-const INK_SOFT = '#4a5058'
+const INK = '#1a1e24'
+const INK_SOFT = '#3a4048'
 
 function makeCanvas(): HTMLCanvasElement {
   const canvas = document.createElement('canvas')

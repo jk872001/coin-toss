@@ -21,8 +21,8 @@ function CameraRig({ phase }: { phase: TossPhase }) {
   useFrame((state) => {
     const t = state.clock.elapsedTime
     const p = phaseRef.current
-    const baseZ = 6.2
-    const baseY = 1.35
+    const baseZ = 5.6
+    const baseY = 1.15
 
     if (p === 'tossing' || p === 'landing') {
       const shake = p === 'landing' ? 0.04 : 0.02
@@ -30,11 +30,11 @@ function CameraRig({ phase }: { phase: TossPhase }) {
       state.camera.position.y = baseY + Math.cos(t * 11) * shake * 0.5
       state.camera.position.z = baseZ
     } else {
-      state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, Math.sin(t * 0.25) * 0.15, 0.05)
-      state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY + Math.sin(t * 0.4) * 0.08, 0.05)
+      state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, Math.sin(t * 0.25) * 0.12, 0.05)
+      state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY + Math.sin(t * 0.4) * 0.06, 0.05)
       state.camera.position.z = THREE.MathUtils.lerp(state.camera.position.z, baseZ, 0.05)
     }
-    state.camera.lookAt(0, 0.4, 0)
+    state.camera.lookAt(0, 0.15, 0)
   })
 
   return null
@@ -87,24 +87,25 @@ function SceneContents(props: CoinSceneProps) {
       <ambientLight intensity={0.35} />
       <directionalLight
         castShadow
-        position={[4, 8, 5]}
-        intensity={1.35}
+        position={[3.5, 6.5, 6]}
+        intensity={1.55}
         shadow-mapSize={[1024, 1024]}
         shadow-camera-far={20}
         shadow-camera-left={-5}
         shadow-camera-right={5}
         shadow-camera-top={5}
         shadow-camera-bottom={-5}
-        color="#fff4e6"
+        color="#fff6ea"
       />
-      <directionalLight position={[-5, 2, -3]} intensity={0.45} color="#6ec8ff" />
-      <pointLight position={[0, -2, 3]} intensity={0.35} color="#ff9b6a" distance={12} />
+      <directionalLight position={[-4, 3, 4]} intensity={0.55} color="#9ad7ff" />
+      <pointLight position={[0, 1.5, 4]} intensity={0.5} color="#ffffff" distance={14} />
+      <pointLight position={[0, -2, 3]} intensity={0.28} color="#ff9b6a" distance={12} />
       <spotLight
-        position={[0, 6, 2]}
-        angle={0.45}
-        penumbra={0.6}
-        intensity={0.55}
-        color="#b8e0ff"
+        position={[0, 5.5, 3]}
+        angle={0.5}
+        penumbra={0.55}
+        intensity={0.7}
+        color="#d8f0ff"
         castShadow={false}
       />
 
@@ -123,21 +124,21 @@ function SceneContents(props: CoinSceneProps) {
 
       <ContactShadows
         position={[0, -0.08, 0]}
-        opacity={0.55}
+        opacity={0.45}
         scale={10}
-        blur={2.4}
+        blur={2.8}
         far={4}
         color="#02040c"
       />
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.09, 0]} receiveShadow>
-        <circleGeometry args={[3.5, 64]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]} receiveShadow>
+        <circleGeometry args={[3.2, 64]} />
         <meshStandardMaterial
-          color="#0a1228"
-          metalness={0.6}
-          roughness={0.55}
+          color="#070d1c"
+          metalness={0.55}
+          roughness={0.65}
           transparent
-          opacity={0.85}
+          opacity={0.55}
         />
       </mesh>
 
@@ -158,7 +159,7 @@ export function CoinScene(props: CoinSceneProps) {
           powerPreference: 'high-performance',
           alpha: true,
         }}
-        camera={{ position: [0, 1.35, 6.2], fov: 40, near: 0.1, far: 80 }}
+        camera={{ position: [0, 1.15, 5.6], fov: 38, near: 0.1, far: 80 }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x050816, 1)
           gl.toneMapping = THREE.ACESFilmicToneMapping

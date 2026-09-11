@@ -60,15 +60,15 @@ export function Coin({
     const headsMap = createHeadsTexture()
     const tailsMap = createTailsTexture()
     const edgeMap = createEdgeTexture()
-    const metal = { metalness: 0.88, roughness: 0.28, envMapIntensity: 1.15 }
+    const metal = { metalness: 0.72, roughness: 0.38, envMapIntensity: 0.85 }
 
     const heads = new THREE.MeshStandardMaterial({ map: headsMap, ...metal })
     const tails = new THREE.MeshStandardMaterial({ map: tailsMap, ...metal })
     const edge = new THREE.MeshStandardMaterial({
       map: edgeMap,
-      metalness: 0.88,
-      roughness: 0.35,
-      envMapIntensity: 1,
+      metalness: 0.75,
+      roughness: 0.42,
+      envMapIntensity: 0.8,
     })
 
     return {
@@ -117,19 +117,20 @@ export function Coin({
 
     if (p === 'idle' && tossId === 0) {
       const t = performance.now() * 0.001
-      g.position.y = Math.sin(t * 1.2) * 0.08
-      g.rotation.y = t * 0.35
-      g.rotation.x = Math.sin(t * 0.7) * 0.08
-      g.rotation.z = Math.cos(t * 0.5) * 0.05
+      g.position.y = 0.12 + Math.sin(t * 1.2) * 0.08
+      // Spin in-plane so the face stays camera-facing
+      g.rotation.z = t * 0.4
+      g.rotation.x = Math.sin(t * 0.7) * 0.12
+      g.rotation.y = Math.cos(t * 0.55) * 0.18
       return
     }
 
     if (p === 'reveal' || (p === 'idle' && face)) {
       const t = performance.now() * 0.001
-      g.position.y = 0.02 + Math.sin(t * 1.4) * 0.03
-      g.rotation.x = restRot.current.x
-      g.rotation.z = restRot.current.z
-      g.rotation.y = restRot.current.y + Math.sin(t * 0.6) * 0.1
+      g.position.y = 0.14 + Math.sin(t * 1.4) * 0.03
+      g.rotation.x = restRot.current.x + Math.sin(t * 0.8) * 0.06
+      g.rotation.y = restRot.current.y + Math.cos(t * 0.6) * 0.1
+      g.rotation.z = restRot.current.z + Math.sin(t * 0.5) * 0.12
       return
     }
 
@@ -218,7 +219,7 @@ export function Coin({
         castShadow
         receiveShadow
       />
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.055, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.08, 0]} receiveShadow>
         <circleGeometry args={[1.08, 48]} />
         <shadowMaterial opacity={0.38} />
       </mesh>
