@@ -118,6 +118,7 @@ export function Coin({
     if (p === 'idle' && tossId === 0) {
       const t = performance.now() * 0.001
       g.position.y = 0.12 + Math.sin(t * 1.2) * 0.08
+      g.scale.setScalar(1)
       // Spin in-plane so the face stays camera-facing
       g.rotation.z = t * 0.4
       g.rotation.x = Math.sin(t * 0.7) * 0.12
@@ -127,15 +128,17 @@ export function Coin({
 
     if (p === 'reveal' || (p === 'idle' && face)) {
       const t = performance.now() * 0.001
-      g.position.y = 0.14 + Math.sin(t * 1.4) * 0.03
+      g.position.y = 0.18 + Math.sin(t * 1.4) * 0.03
       g.rotation.x = restRot.current.x + Math.sin(t * 0.8) * 0.06
       g.rotation.y = restRot.current.y + Math.cos(t * 0.6) * 0.1
       g.rotation.z = restRot.current.z + Math.sin(t * 0.5) * 0.12
+      g.scale.setScalar(1)
       return
     }
 
     if (p !== 'tossing' && p !== 'landing') return
 
+    g.scale.setScalar(1)
     elapsed.current += dt
     const time = elapsed.current
 

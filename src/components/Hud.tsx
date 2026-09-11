@@ -75,7 +75,9 @@ export function Hud({
         {tossing && (
           <p className="hint tossing-hint fade-in">in orbit… hold that thought</p>
         )}
+      </div>
 
+      <footer className="hud-bottom">
         {revealed && result && (
           <div
             className={`result-card ${pulse ? 'result-pulse' : ''} ${result}`}
@@ -91,9 +93,6 @@ export function Hud({
             </p>
           </div>
         )}
-      </div>
-
-      <footer className="hud-bottom">
         <button
           type="button"
           className={`toss-btn ${tossing ? 'is-busy' : ''}`}
