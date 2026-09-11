@@ -1,0 +1,77 @@
+:root {
+  color-scheme: dark;
+  --void: #050816;
+  --void-2: #0a1430;
+  --star: #e8f4ff;
+  --mist: #8eb8d8;
+  --aurora: #3dd6c3;
+  --flare: #ff8f6b;
+  --coin: #d7dde6;
+  --text: #f2f6fb;
+  --muted: #9bb0c7;
+  --glow: rgba(61, 214, 195, 0.45);
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--void);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--aurora);
+  color: #041018;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: calc(var(--safe-top) + 1rem);
+}
