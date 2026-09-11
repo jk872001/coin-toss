@@ -143,10 +143,11 @@ export function Coin({
       const k = Math.min(time / 0.55, 1)
       const e = easeOutCubic(k)
       const finalX = face === 'heads' ? 0 : Math.PI
-      g.position.set(0, (1 - e) * 1.1, 0)
-      g.rotation.set(finalX * e, e * Math.PI * 2, 0)
+      g.position.set(0, 0.12 + (1 - e) * 1.1, 0)
+      g.rotation.set(finalX * e, 0, e * Math.PI * 2)
       if (k >= 1) {
         g.rotation.set(finalX, 0, 0)
+        g.position.set(0, 0.12, 0)
         restRot.current = { x: finalX, y: 0, z: 0 }
         if (!landed.current) {
           landed.current = true
@@ -167,10 +168,10 @@ export function Coin({
     let y: number
     if (progress < 0.7) {
       const u = progress / 0.7
-      y = Math.sin(u * Math.PI) * 3.35
+      y = 0.12 + Math.sin(u * Math.PI) * 3.35
     } else {
       const u = (progress - 0.7) / 0.3
-      y = (1 - easeOutBounce(Math.min(u, 1))) * 0.5
+      y = 0.12 + (1 - easeOutBounce(Math.min(u, 1))) * 0.5
     }
 
     const driftX = Math.sin(progress * Math.PI * 2) * 0.32 * (1 - progress * 0.55)
@@ -196,7 +197,7 @@ export function Coin({
 
     if (progress >= 1) {
       const finalX = face === 'heads' ? 0 : Math.PI
-      g.position.set(0, 0, 0)
+      g.position.set(0, 0.12, 0)
       g.rotation.set(finalX, 0, 0)
       restRot.current = { x: finalX, y: 0, z: 0 }
 
